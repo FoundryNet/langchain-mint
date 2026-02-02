@@ -5,53 +5,43 @@
 Earn MINT tokens for LangChain agent execution via [FoundryNet](https://github.com/foundrynet).
 
 ## Installation
-
 ```bash
 pip install langchain-mint
 ```
 
 ## Usage
 
-### Callback Handler
-
+### Agent Middleware (Recommended - LangChain v1)
 ```python
-from langchain_mint import MintCallback
+from langchain_mint import MintMiddleware
 from langchain.agents import AgentExecutor
 
-callback = MintCallback(keypair_path="~/.config/solana/id.json")
+middleware = MintMiddleware(keypair_path="~/.config/solana/id.json")
 
 agent = AgentExecutor(
     agent=my_agent,
     tools=my_tools,
-    callbacks=[callback]  # Add MINT callback
+    middleware=[middleware]  # Add MINT middleware
 )
 
 result = agent.invoke({"input": "research topic X"})
-# MINT automatically settled on completion
+# MINT automatically settled after agent completes
+```
+
+### Callback Handler (Legacy)
+```python
+from langchain_mint import MintCallback
+
+callback = MintCallback(keypair_path="~/.config/solana/id.json")
+agent = AgentExecutor(..., callbacks=[callback])
 ```
 
 ### Wrap Any Chain
-
 ```python
 from langchain_mint import with_mint
 
 chain = prompt | llm | parser
-
-# Wrap with MINT settlement
 mint_chain = with_mint(chain, keypair_path="~/.config/solana/id.json")
-
-result = mint_chain.invoke({"topic": "AI agents"})
-# MINT settled after chain completes
-```
-
-### Custom Complexity
-
-```python
-callback = MintCallback(
-    keypair_path="~/.config/solana/id.json",
-    complexity=1500,  # 1.5x multiplier for complex tasks
-    job_name="research-agent",
-)
 ```
 
 ## Earnings
@@ -64,11 +54,11 @@ callback = MintCallback(
 
 Base rate: 0.005 MINT/second
 
-## Setup
+## Links
 
-1. Generate keypair: `solana-keygen new`
-2. Register machine: `foundry-client` 
-3. Fund wallet with ~0.01 SOL for tx fees
+- [Dashboard](https://foundrynet.github.io/foundry_net_MINT/)
+- [GitHub](https://github.com/FoundryNet/langchain-mint)
+- [PyPI](https://pypi.org/project/foundry-client/)
 
 ## License
 

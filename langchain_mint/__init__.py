@@ -3,24 +3,25 @@ LangChain MINT Integration
 ==========================
 Earn MINT tokens for LangChain agent execution via FoundryNet.
 
-Your agents work. Your agents earn.
+Usage (Middleware - recommended for v1):
+    from langchain_mint import MintMiddleware
+    
+    middleware = MintMiddleware(keypair_path="~/.config/solana/id.json")
+    agent = AgentExecutor(..., middleware=[middleware])
 
-Usage:
+Usage (Callback - legacy):
     from langchain_mint import MintCallback
     
     callback = MintCallback(keypair_path="~/.config/solana/id.json")
     agent = AgentExecutor(..., callbacks=[callback])
-    
-    # Or wrap any chain:
-    from langchain_mint import with_mint
-    chain = with_mint(my_chain, keypair_path="...")
 
 Links:
-    - GitHub: https://github.com/foundrynet
+    - GitHub: https://github.com/FoundryNet/langchain-mint
     - Dashboard: https://foundrynet.github.io/foundry_net_MINT/
 """
 
+from .middleware import MintMiddleware
 from .callback import MintCallback, with_mint
 
-__version__ = "1.0.0"
-__all__ = ["MintCallback", "with_mint"]
+__version__ = "2.0.0"
+__all__ = ["MintMiddleware", "MintCallback", "with_mint"]

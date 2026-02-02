@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "langchain-mint"
-version = "1.0.0"
+version = "2.0.0"
 description = "MINT Protocol callback for LangChain - Earn MINT tokens for agent execution"
 readme = "README.md"
 license = "MIT"
