@@ -26,15 +26,15 @@ from pathlib import Path
 from dataclasses import dataclass, field
 
 from solana.rpc.api import Client
-from solana.transaction import Transaction
-from solana.keypair import Keypair
-from solana.publickey import PublicKey
-from solana.system_program import SYS_PROGRAM_ID
+from solders.transaction import Transaction
+from solders.keypair import Keypair
+from solders.pubkey import Pubkey as PublicKey
+SYS_PROGRAM_ID = PublicKey.from_string("11111111111111111111111111111111")
 from solders.instruction import Instruction, AccountMeta
 
 # FoundryNet Mainnet
-MINT_PROGRAM_ID = PublicKey("4ZvTZ3skfeMF3ZGyABoazPa9tiudw2QSwuVKn45t2AKL")
-STATE_ACCOUNT = PublicKey("2Lm7hrtqK9W5tykVu4U37nUNJiiFh6WQ1rD8ZJWXomr2")
+MINT_PROGRAM_ID = PublicKey.from_string("4ZvTZ3skfeMF3ZGyABoazPa9tiudw2QSwuVKn45t2AKL")
+STATE_ACCOUNT = PublicKey.from_string("2Lm7hrtqK9W5tykVu4U37nUNJiiFh6WQ1rD8ZJWXomr2")
 DEFAULT_RPC = "https://api.mainnet-beta.solana.com"
 
 # Anchor discriminator for record_job (snake_case)
